@@ -68,7 +68,13 @@ window.Aardwolf = new (function() {
             req.open('POST', serverUrl + '/mobile' + path, false);
             req.setRequestHeader('Content-Type', 'application/json');
 			if (path === '/breakpoint') {
-				req.timeout = 0;
+                try {
+                    req.timeout = 0;
+                } catch (e) {
+                    // most likely because the synchronous request was sent from a document, not from a webworker
+                    // chrome error: Uncaught DOMException: Failed to set the 'timeout' property on 'XMLHttpRequest': Timeouts cannot be set for synchronous requests made from a document.
+                    // ignore, and hope the request doest time out (don't wait too much while paused on breakpoints)
+                }
 			}
             req.send(JSON.stringify(payload));
 			if (!req.responseText) {
