@@ -7,7 +7,7 @@
 window.Aardwolf = new (function() {
     var serverHost = '__SERVER_HOST__';
     var serverPort = '__SERVER_PORT__';
-    var serverUrl = 'http://' + serverHost + ':' + serverPort;
+    var serverUrl = window.AARDWOLF_DEBUG_SERVER_PREFIX_OVERRIDE || ('http://' + serverHost + ':' + serverPort);
     var breakpoints = {};
     var shouldBreak = function() { return false; };
     var asyncXHR = null;
