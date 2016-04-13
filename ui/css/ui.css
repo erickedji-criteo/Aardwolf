@@ -192,8 +192,9 @@ textarea {
 #eval {
     position: absolute;
     border: none;
-    right: 0px;
     left: 50px;
+    top: 4px;
+    width: 90%;
 }
 #output-bar span {
     color: #0040D0;
